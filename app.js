@@ -11,15 +11,15 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-    console.log('new USER connected');
+    console.log(`A new client connected: ${socket.id}`);
 
     socket.on('disconnect', () => {
-        console.log('USER disconnected');
+        console.log(`The client disconnected: ${socket.id}`);
     })
 
     // listening to 'client_tx' event from client
     socket.on('client_tx', (msg) => {
-        console.log('received from client', msg)
+        console.log(`Message: ${JSON.stringify(msg)} Received from client ${socket.id}`)
     })
 
     // sending 'server_tx" event to client
